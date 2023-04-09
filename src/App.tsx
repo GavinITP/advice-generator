@@ -2,7 +2,7 @@ import Card from "./components/Card";
 
 const App = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-slate-800 px-4">
       <Card />
     </div>
   );
