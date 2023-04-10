@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const API_ENDPOINT = "https://api.adviceslip.com/advice";
+
 const Card = () => {
   const [id, setId] = useState("");
   const [advice, setAdvice] = useState("");
@@ -11,7 +13,7 @@ const Card = () => {
   const fetchAdvice = () => {
     setIsLoading(true);
     axios
-      .get("https://api.adviceslip.com/advicex")
+      .get(API_ENDPOINT)
       .then((res) => {
         setId(res.data.slip.id);
         setAdvice(res.data.slip.advice);
