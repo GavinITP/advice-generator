@@ -4,19 +4,21 @@ import { useEffect, useState } from "react";
 const Card = () => {
   const [id, setId] = useState("");
   const [advice, setAdvice] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fetchAdvice = () => {
     setIsLoading(true);
     axios
-      .get("https://api.adviceslip.com/advice")
+      .get("https://api.adviceslip.com/advicex")
       .then((res) => {
         setId(res.data.slip.id);
         setAdvice(res.data.slip.advice);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMessage(err.message);
         setIsLoading(false);
       });
   };
@@ -28,6 +30,13 @@ const Card = () => {
   if (isLoading)
     return (
       <p className="text-center text-slate-100 relative top-40">Loading...</p>
+    );
+
+  if (errorMessage)
+    return (
+      <p className="text-center text-slate-100 relative top-40">
+        {errorMessage}
+      </p>
     );
 
   return (
