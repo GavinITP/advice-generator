@@ -32,13 +32,11 @@ const App = () => {
   }, []);
 
   return (
-    <div className="px-[5%] flex justify-center items-center h-screen">
+    <div className="px-[10%] flex justify-center items-center h-screen">
       {isLoading ? (
         <Spinner />
       ) : errorMessage ? (
-        <p className="text-center text-slate-100 relative top-40">
-          {errorMessage}
-        </p>
+        <p className="text-center text-slate-100">{errorMessage}</p>
       ) : (
         <Card id={id} advice={advice} fetchAdvice={fetchAdvice} />
       )}
