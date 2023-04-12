@@ -1,48 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+interface Props {
+  id: string;
+  advice: string;
+  fetchAdvice: () => void;
+}
 
-const API_ENDPOINT = "https://api.adviceslip.com/advice";
-
-const Card = () => {
-  const [id, setId] = useState("");
-  const [advice, setAdvice] = useState("");
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const fetchAdvice = () => {
-    setIsLoading(true);
-    axios
-      .get(API_ENDPOINT)
-      .then((res) => {
-        setId(res.data.slip.id);
-        setAdvice(res.data.slip.advice);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setErrorMessage(err.message);
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchAdvice();
-  }, []);
-
-  if (isLoading)
-    return (
-      <p className="text-center text-slate-100 relative top-40">Loading...</p>
-    );
-
-  if (errorMessage)
-    return (
-      <p className="text-center text-slate-100 relative top-40">
-        {errorMessage}
-      </p>
-    );
-
+const Card = ({ id, advice, fetchAdvice }: Props) => {
   return (
-    <div className="w-full bg-slate-700 text-slate-200 rounded-xl relative top-32 text-center px-4 hover:scale-[102%] ease-out duration-300 ">
+    <div className="max-w-xl bg-slate-700 text-slate-200 rounded-xl text-center px-4 hover:scale-[102%] ease-out duration-300 ">
       <h1 className="text-xs text-emerald-400 uppercase font-bold py-8">
         Advice #{id}
       </h1>
